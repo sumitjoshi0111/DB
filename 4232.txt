@@ -1,0 +1,54 @@
+✅ SQL Query:
+SELECT name, credit_rating, sales_rep_id
+FROM S_customer
+WHERE credit_rating > 5
+  AND sales_rep_id = 4232;
+🔹 If you also want to demonstrate pattern matching (for example, names starting with 'A'):
+SELECT name, credit_rating, sales_rep_id
+FROM S_customer
+WHERE credit_rating > 5
+  AND sales_rep_id = 4232
+  AND name LIKE 'A%';
+🔍 Explanation:
+credit_rating > 5 → filters customers with rating greater than 5
+sales_rep_id = 4232 → selects customers handled by that sales rep
+AND → ensures both conditions are satisfied
+LIKE 'A%' → pattern matching (names starting with "A")
+🔁 Example using OR (if needed for demonstration):
+SELECT name, credit_rating, sales_rep_id
+FROM S_customer
+WHERE credit_rating > 5
+   OR sales_rep_id = 4232;
+
+2..
+
+✅ Table Structure (for reference)
+CREATE TABLE CUSTOMERS (
+    id NUMBER,
+    name VARCHAR2(50),
+    age NUMBER,
+    address VARCHAR2(100),
+    salary NUMBER
+);
+✅ Row-Level Trigger
+CREATE OR REPLACE TRIGGER trg_salary_diff
+BEFORE INSERT OR UPDATE OR DELETE
+ON CUSTOMERS
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        DBMS_OUTPUT.PUT_LINE('INSERT Operation');
+        DBMS_OUTPUT.PUT_LINE('New Salary: ' || :NEW.salary);
+
+    ELSIF UPDATING THEN
+        DBMS_OUTPUT.PUT_LINE('UPDATE Operation');
+        DBMS_OUTPUT.PUT_LINE('Old Salary: ' || :OLD.salary);
+        DBMS_OUTPUT.PUT_LINE('New Salary: ' || :NEW.salary);
+        DBMS_OUTPUT.PUT_LINE('Difference: ' || (:NEW.salary - :OLD.salary));
+
+    ELSIF DELETING THEN
+        DBMS_OUTPUT.PUT_LINE('DELETE Operation');
+        DBMS_OUTPUT.PUT_LINE('Old Salary: ' || :OLD.salary);
+    END IF;
+END;
+/

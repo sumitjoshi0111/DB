@@ -1,0 +1,51 @@
+✅ A) Employees working under ManagerId = 986
+SELECT EmpId, FullName
+FROM EmployeeDetails
+WHERE ManagerId = 986;
+
+🔍 This will return employees whose ManagerId is 986
+✔ From your data → Walter White is the manager, so employees under him will be shown
+
+✅ B) Names starting with any 2 characters, followed by "hn", then anything
+SELECT *
+FROM EmployeeDetails
+WHERE FullName LIKE '__hn%';
+
+🔍 Pattern Explanation:
+
+_ → exactly one character
+__ → any two characters
+hn → fixed text
+% → any sequence after that
+
+✔ Example match: "John Snow"
+(Jo + hn + rest)
+
+✅ C) Replace space in FullName with ‘-’
+SELECT REPLACE(FullName, ' ', '-') AS ModifiedName
+FROM EmployeeDetails;
+
+2.
+
+✅ Create Stored Procedure
+CREATE OR REPLACE PROCEDURE add_numbers (
+    num1 IN NUMBER,
+    num2 IN NUMBER
+)
+IS
+    result NUMBER;
+BEGIN
+    result := num1 + num2;
+    DBMS_OUTPUT.PUT_LINE('Sum = ' || result);
+END;
+/
+✅ Execute / Call the Procedure
+SET SERVEROUTPUT ON;
+
+BEGIN
+    add_numbers(10, 20);
+END;
+/
+🔍 Output:
+Sum = 30
+

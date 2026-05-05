@@ -1,0 +1,42 @@
+✅ 1) Customers whose id falls in range 303 to 306
+SELECT id, name, phone_no
+FROM CUSTOMERS
+WHERE id BETWEEN 303 AND 306;
+
+🔹 BETWEEN includes both 303 and 306.
+
+✅ 2) Customers whose id > 300 and belong to Pune
+SELECT id, name, phone_no
+FROM CUSTOMERS
+WHERE id > 300
+  AND city = 'Pune';
+
+🔹 Uses AND logical operator.
+
+✅ 3) Employees whose 4th and 5th letters are 'sh' and belong to Pune
+SELECT id, name
+FROM CUSTOMERS
+WHERE name LIKE '___sh%'
+  AND city = 'Pune';
+
+2.
+
+✅ PL/SQL Block using Implicit Cursor
+SET SERVEROUTPUT ON;
+
+BEGIN
+    UPDATE CUSTOMERS
+    SET salary = salary + 5000;
+
+    DBMS_OUTPUT.PUT_LINE('Number of rows updated: ' || SQL%ROWCOUNT);
+END;
+/
+🔍 Explanation:
+UPDATE CUSTOMERS SET salary = salary + 5000;
+→ increases salary of all customers by 5000
+SQL%ROWCOUNT
+→ returns the number of rows affected by the last SQL statement
+DBMS_OUTPUT.PUT_LINE
+→ prints the result on screen
+✅ Example Output:
+Number of rows updated: 5

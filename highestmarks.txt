@@ -1,0 +1,53 @@
+✅ Create STUDENT Table
+CREATE TABLE STUDENT (
+    id NUMBER PRIMARY KEY,
+    name VARCHAR2(50),
+    math_marks NUMBER,
+    dbms_marks NUMBER,
+    attendance NUMBER   -- in percentage
+);
+✅ Insert Sample Records
+INSERT INTO STUDENT VALUES (1, 'Amit', 85, 78, 90);
+INSERT INTO STUDENT VALUES (2, 'Sneha', 92, 88, 85);
+INSERT INTO STUDENT VALUES (3, 'Rahul', 76, 80, 70);
+INSERT INTO STUDENT VALUES (4, 'Priya', 92, 91, 60);
+INSERT INTO STUDENT VALUES (5, 'Karan', 65, 72, 95);
+
+COMMIT;
+✅ 1) Student(s) having Highest Marks in Math
+SELECT *
+FROM STUDENT
+WHERE math_marks = (SELECT MAX(math_marks) FROM STUDENT);
+✅ 2) Student(s) having Lowest Attendance
+SELECT *
+FROM STUDENT
+WHERE attendance = (SELECT MIN(attendance) FROM STUDENT);
+✅ 3) Total Number of Students
+SELECT COUNT(*) AS total_students
+FROM STUDENT;
+✅ 4) Average Marks of DBMS
+SELECT AVG(dbms_marks) AS avg_dbms_marks
+FROM STUDENT;
+
+2..
+
+CREATE TABLE STUDENT (
+    id NUMBER,
+    name VARCHAR2(50),
+    age NUMBER
+);
+✅ 1) Adding NOT NULL Constraint
+ALTER TABLE STUDENT
+MODIFY name VARCHAR2(50) NOT NULL;
+
+🔹 This ensures that the name column cannot store NULL values.
+
+✅ 2) Removing NOT NULL Constraint
+ALTER TABLE STUDENT
+MODIFY name VARCHAR2(50) NULL;
+
+🔹 This allows the name column to accept NULL values again.
+
+✅ 3) Adding a New Column
+ALTER TABLE STUDENT
+ADD address VARCHAR2(100);
