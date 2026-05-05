@@ -1,0 +1,79 @@
+✅ Assume STUDENT table
+CREATE TABLE student (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    age INT
+);
+✅ 1. INSERT Trigger
+DELIMITER //
+
+CREATE TRIGGER trg_student_insert
+AFTER INSERT ON student
+FOR EACH ROW
+BEGIN
+    SELECT CONCAT('Inserted Age: ', NEW.age) AS message;
+END //
+
+DELIMITER ;
+✅ 2. UPDATE Trigger (Main Requirement)
+
+👉 This computes age difference
+
+DELIMITER //
+
+CREATE TRIGGER trg_student_update
+AFTER UPDATE ON student
+FOR EACH ROW
+BEGIN
+    DECLARE diff INT;
+    SET diff = NEW.age - OLD.age;
+
+    SELECT CONCAT('Age Difference: ', diff) AS message;
+END //
+
+DELIMITER ;
+✅ 3. DELETE Trigger
+DELIMITER //
+
+CREATE TRIGGER trg_student_delete
+AFTER DELETE ON student
+FOR EACH ROW
+BEGIN
+    SELECT CONCAT('Deleted Age was: ', OLD.age) AS message;
+END //
+
+DELIMITER ;
+
+
+2.
+✅ 1. Create Tables with Primary Key & Foreign Key
+🔹 Parent Table (Department)
+CREATE TABLE Department (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50)
+);
+🔹 Child Table (Employee with Foreign Key)
+CREATE TABLE Employee (
+    emp_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    dept_id INT,
+    salary INT,
+    CONSTRAINT fk_dept
+    FOREIGN KEY (dept_id) REFERENCES Department(dept_id)
+);
+✅ 2. ALTER TABLE Operations
+🔹 (a) Add New Column
+ALTER TABLE Employee
+ADD email VARCHAR(100);
+🔹 (b) Modify Existing Column
+ALTER TABLE Employee
+MODIFY salary DECIMAL(10,2);
+🔹 (c) Remove Constraint (Foreign Key)
+
+👉 First find constraint name (fk_dept used above)
+
+ALTER TABLE Employee
+DROP FOREIGN KEY fk_dept;
+✅ 3. DROP TABLE
+DROP TABLE Employee;
+DROP TABLE Department;

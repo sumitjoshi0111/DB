@@ -1,0 +1,74 @@
+DELIMITER //
+
+CREATE PROCEDURE GetStudentsByDepartment(IN dept_name VARCHAR(50))
+BEGIN
+    SELECT *
+    FROM Students
+    WHERE department = dept_name;
+END //
+
+DELIMITER ;
+
+
+CALL GetStudentsByDepartment('Computer');
+
+
+2.
+✅ 1. Create Database
+CREATE DATABASE avdhoot;
+USE avdhoot;
+✅ 2. Create Table
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    department VARCHAR(50),
+    age INT
+);
+✅ 3. Insert Sample Data
+INSERT INTO Students VALUES
+(1, 'Rahul', 'Sharma', 'Computer', 20),
+(2, 'Amit', 'Patil', 'Mechanical', 22),
+(3, 'Sneha', 'Joshi', 'Computer', 19),
+(4, 'Pooja', 'Kulkarni', 'Electrical', 21);
+✅ 4. Arithmetic Operator Queries (ANY 3)
+-- Add 5 years to age
+SELECT first_name, age + 5 AS future_age FROM Students;
+
+-- Multiply age by 2
+SELECT first_name, age * 2 AS double_age FROM Students;
+
+-- Average age calculation (division)
+SELECT first_name, age / 2 AS half_age FROM Students;
+✅ 5. Boolean SQL Queries (ANY 3)
+-- Students older than 20
+SELECT * FROM Students WHERE age > 20;
+
+-- Students from Computer department
+SELECT * FROM Students WHERE department = 'Computer';
+
+-- Students not from Mechanical
+SELECT * FROM Students WHERE department != 'Mechanical';
+✅ 6. Pattern Matching Queries (ANY 3)
+-- Names starting with 'R'
+SELECT * FROM Students WHERE first_name LIKE 'R%';
+
+-- Names ending with 'a'
+SELECT * FROM Students WHERE first_name LIKE '%a';
+
+-- Names containing 'h'
+SELECT * FROM Students WHERE first_name LIKE '%h%';
+✅ 7. Difference Between TRUNCATE and DROP
+🔹 TRUNCATE TABLE
+TRUNCATE TABLE Students;
+Deletes all records
+Table structure remains
+Faster than DELETE
+Cannot be rolled back (in most cases)
+🔹 DROP TABLE
+DROP TABLE Students;
+Deletes entire table
+Structure + data both removed
+Cannot be recovered easily
+
+

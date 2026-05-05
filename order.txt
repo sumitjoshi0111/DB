@@ -1,0 +1,50 @@
+✅ A) Update salary with condition
+
+👉 Set salary to 8000 only if current salary is less than 5000
+
+UPDATE employees
+SET salary = 8000
+WHERE employee_id = 105
+  AND salary < 5000;
+✅ B) Update job_title with multiple conditions
+
+👉 Change job to SH_CLERK only if:
+
+employee_id = 118
+department_id = 30
+job_title does NOT start with 'SH'
+UPDATE employees
+SET job_title = 'SH_CLERK'
+WHERE employee_id = 118
+  AND department_id = 30
+  AND job_title NOT LIKE 'SH%';
+
+
+2.
+
+✅ 1. Create Table
+CREATE TABLE orders (
+    ord_no INT PRIMARY KEY,
+    purch_amt DECIMAL(10,2),
+    ord_date DATE,
+    customer_id INT,
+    salesman_id INT
+);
+✅ 2. Create View
+
+👉 This view will:
+
+Count unique customers
+Calculate average purchase amount
+Calculate total purchase amount
+Group results by date
+CREATE VIEW order_summary AS
+SELECT 
+    ord_date,
+    COUNT(DISTINCT customer_id) AS unique_customers,
+    AVG(purch_amt) AS avg_purchase,
+    SUM(purch_amt) AS total_purchase
+FROM orders
+GROUP BY ord_date;
+✅ 3. View the Result
+SELECT * FROM order_summary;

@@ -1,0 +1,63 @@
+✅ 1. Create Table (Employee Details)
+CREATE TABLE employee (
+    emp_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    department VARCHAR(50),
+    salary INT
+);
+✅ 2. Create Stored Procedure with INPUT Parameters
+DELIMITER //
+
+CREATE PROCEDURE AddEmployee(
+    IN e_id INT,
+    IN e_name VARCHAR(50),
+    IN e_dept VARCHAR(50),
+    IN e_salary INT
+)
+BEGIN
+    INSERT INTO employee(emp_id, name, department, salary)
+    VALUES (e_id, e_name, e_dept, e_salary);
+END //
+
+DELIMITER ;
+✅ 3. Call the Procedure (Pass Parameters)
+CALL AddEmployee(1, 'Rahul', 'IT', 30000);
+CALL AddEmployee(2, 'Sneha', 'HR', 35000);
+✅ 4. Verify Data
+SELECT * FROM employee;
+
+2.
+
+✅ 1. Create Database & Use It
+CREATE DATABASE company_db;
+USE company_db;
+✅ 2. Create Table
+CREATE TABLE employee (
+    emp_id INT,
+    name VARCHAR(50),
+    department VARCHAR(50),
+    salary INT
+);
+✅ 3. DML COMMANDS DEMONSTRATION
+🔹 INSERT
+INSERT INTO employee VALUES (1, 'Rahul', 'IT', 30000);
+INSERT INTO employee VALUES (2, 'Sneha', 'HR', 35000);
+INSERT INTO employee VALUES (3, 'Amit', 'Finance', 40000);
+🔹 SELECT
+SELECT * FROM employee;
+🔹 UPDATE
+UPDATE employee
+SET salary = 45000
+WHERE emp_id = 3;
+🔹 DELETE
+DELETE FROM employee
+WHERE emp_id = 2;
+✅ 4. Add Column to Existing Table
+ALTER TABLE employee
+ADD email VARCHAR(100);
+✅ 5. Set Primary Key (after table creation)
+ALTER TABLE employee
+ADD PRIMARY KEY (emp_id);
+✅ 6. Remove Primary Key
+ALTER TABLE employee
+DROP PRIMARY KEY;

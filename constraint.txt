@@ -1,0 +1,61 @@
+1) Create EMPLOYEE table
+CREATE TABLE EMPLOYEE (
+    E_id NUMBER PRIMARY KEY,
+    E_name VARCHAR2(50),
+    E_dept VARCHAR2(50),
+    E_salary NUMBER,
+    E_pno VARCHAR2(15),
+    E_city VARCHAR2(50)
+);
+2) Create a view with selected columns
+
+(View containing: E_id, E_name, E_dept, E_salary)
+
+CREATE OR REPLACE VIEW emp_view AS
+SELECT E_id, E_name, E_dept, E_salary
+FROM EMPLOYEE;
+3) Create another table (Employee_Details)
+
+(You can define additional attributes like DOB, designation, etc.)
+
+CREATE TABLE EMPLOYEE_DETAILS (
+    E_id NUMBER,
+    designation VARCHAR2(50),
+    DOB DATE,
+    experience NUMBER,
+    PRIMARY KEY (E_id)
+);
+4) Create a view from both tables (JOIN)
+CREATE OR REPLACE VIEW emp_full_view AS
+SELECT 
+    e.E_id,
+    e.E_name,
+    e.E_dept,
+    e.E_salary,
+    d.designation,
+    d.DOB,
+    d.experience
+FROM EMPLOYEE e
+JOIN EMPLOYEE_DETAILS d
+ON e.E_id = d.E_id;
+
+2.
+
+1) Adding NOT NULL constraint
+
+(Example: make E_name mandatory)
+
+ALTER TABLE EMPLOYEE
+MODIFY E_name VARCHAR2(50) NOT NULL;
+2) Removing NOT NULL constraint
+
+(Example: allow NULL values in E_name)
+
+ALTER TABLE EMPLOYEE
+MODIFY E_name VARCHAR2(50) NULL;
+3) Adding a new column
+
+(Example: add E_age column)
+
+ALTER TABLE EMPLOYEE
+ADD E_age NUMBER;

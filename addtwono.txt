@@ -1,0 +1,48 @@
+a) Difference between highest and lowest salaries
+SELECT MAX(SALARY) - MIN(SALARY) AS SALARY_DIFFERENCE
+FROM EMPLOYEES;
+b) Department ID and total salary payable in each department
+SELECT DEPARTMENT_ID, SUM(SALARY) AS TOTAL_SALARY
+FROM EMPLOYEES
+GROUP BY DEPARTMENT_ID;
+c) Average salary for each job ID excluding Programmer
+SELECT JOB_ID, AVG(SALARY) AS AVG_SALARY
+FROM EMPLOYEES
+WHERE JOB_ID <> 'IT_PROG'
+GROUP BY JOB_ID;
+d) Total, maximum, minimum, average salary (job-wise) for department 90
+SELECT 
+    JOB_ID,
+    SUM(SALARY) AS TOTAL_SALARY,
+    MAX(SALARY) AS MAX_SALARY,
+    MIN(SALARY) AS MIN_SALARY,
+    AVG(SALARY) AS AVG_SALARY
+FROM EMPLOYEES
+WHERE DEPARTMENT_ID = 90
+GROUP BY JOB_ID;
+
+2.
+1) Create the stored procedure
+CREATE OR REPLACE PROCEDURE add_numbers (
+    a IN NUMBER,
+    b IN NUMBER,
+    result OUT NUMBER
+)
+IS
+BEGIN
+    result := a + b;
+END;
+/
+2) Call the procedure (Execute it)
+
+👉 Using an anonymous block:
+
+DECLARE
+    res NUMBER;
+BEGIN
+    add_numbers(10, 20, res);
+    DBMS_OUTPUT.PUT_LINE('Sum = ' || res);
+END;
+/
+3) Enable output (important in Oracle)
+SET SERVEROUTPUT ON;

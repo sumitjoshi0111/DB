@@ -1,0 +1,42 @@
+✅ (a) Rename table countries → country_new
+RENAME TABLE countries TO country_new;
+✅ (b) Add column no_of_states
+ALTER TABLE country_new
+ADD no_of_states INT;
+✅ (c) Change data type of country_id in locations
+ALTER TABLE locations
+MODIFY country_id INT;
+✅ (d) Add composite primary key (location_id, country_id)
+ALTER TABLE locations
+ADD PRIMARY KEY (location_id, country_id);
+
+2.
+
+✅ 1. Create Tables with Primary Key & Foreign Key
+🔹 Parent Table
+CREATE TABLE Department (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50)
+);
+🔹 Child Table (with Foreign Key)
+CREATE TABLE Employee (
+    emp_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    dept_id INT,
+    salary INT,
+    CONSTRAINT fk_dept
+    FOREIGN KEY (dept_id) REFERENCES Department(dept_id)
+);
+✅ 2. ALTER TABLE Operations
+🔹 (a) Add New Column
+ALTER TABLE Employee
+ADD email VARCHAR(100);
+🔹 (b) Modify Existing Column
+ALTER TABLE Employee
+MODIFY salary DECIMAL(10,2);
+🔹 (c) Remove Constraint (Foreign Key)
+ALTER TABLE Employee
+DROP FOREIGN KEY fk_dept;
+✅ 3. DROP TABLE
+DROP TABLE Employee;
+DROP TABLE Department;

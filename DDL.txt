@@ -1,0 +1,79 @@
+✅ Using MySQL
+🔹 1. Create Database & Use It
+CREATE DATABASE avdhoot;
+USE avdhoot;
+🔹 2. Create Table (student_details)
+CREATE TABLE student_details (
+    student_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    department VARCHAR(50),
+    age INT
+);
+🔹 3. Create Procedure Show
+DELIMITER //
+
+CREATE PROCEDURE Show()
+BEGIN
+    SELECT * FROM student_details;
+END //
+
+DELIMITER ;
+🔹 4. Execute Procedure
+CALL Show();
+🔹 5. Rename Procedure Show → Display
+
+👉 Important: MySQL does NOT support direct renaming of procedures.
+
+So you must:
+
+Step 1: Drop old procedure
+DROP PROCEDURE Show;
+Step 2: Create new procedure
+DELIMITER //
+
+CREATE PROCEDURE Display()
+BEGIN
+    SELECT * FROM student_details;
+END //
+
+DELIMITER ;
+🔹 6. Call New Procedure
+CALL Display();
+
+
+2.
+✅ 1. CREATE DATABASE
+CREATE DATABASE avdhoot;
+USE avdhoot;
+✅ 2. CREATE TABLE (without primary key first)
+CREATE TABLE student_details (
+    student_id INT,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    department VARCHAR(50),
+    age INT
+);
+✅ 3. ALTER TABLE (Add Primary Key after creation)
+ALTER TABLE student_details
+ADD PRIMARY KEY (student_id);
+✅ 4. ALTER TABLE (Other DDL operations)
+🔹 Add new column
+ALTER TABLE student_details
+ADD email VARCHAR(100);
+🔹 Modify column
+ALTER TABLE student_details
+MODIFY first_name VARCHAR(100);
+🔹 Drop column
+ALTER TABLE student_details
+DROP COLUMN email;
+🔹 Rename table
+RENAME TABLE student_details TO students;
+✅ 5. TRUNCATE TABLE
+TRUNCATE TABLE students;
+Deletes all data, keeps structure
+✅ 6. DROP TABLE
+DROP TABLE students;
+Deletes table completely
+✅ 7. DROP DATABASE
+DROP DATABASE avdhoot;

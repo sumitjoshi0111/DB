@@ -1,0 +1,68 @@
+✅ (a) Add Composite Primary Key
+
+(on location_id and country_id)
+
+ALTER TABLE locations
+ADD PRIMARY KEY (location_id, country_id);
+✅ (b) Drop Existing Primary Key
+ALTER TABLE locations
+DROP PRIMARY KEY;
+✅ (c) Add Foreign Key
+
+(job_history.job_id → jobs.job_id)
+
+ALTER TABLE job_history
+ADD CONSTRAINT fk_job
+FOREIGN KEY (job_id)
+REFERENCES jobs(job_id);
+
+
+2.
+
+✅ 1. Create Database
+CREATE DATABASE college_db;
+USE college_db;
+✅ 2. Create Table
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    department VARCHAR(50),
+    age INT
+);
+✅ 3. Insert Sample Data
+INSERT INTO Students VALUES
+(1, 'Rahul', 'Sharma', 'Computer', 20),
+(2, 'Sneha', 'Patil', 'IT', 22),
+(3, 'Amit', 'Joshi', 'Mechanical', 21),
+(4, 'Pooja', 'Kulkarni', 'Electrical', 19);
+✅ 4. Arithmetic Operator Queries (Any 3)
+-- Addition
+SELECT first_name, age + 5 AS increased_age FROM Students;
+
+-- Multiplication
+SELECT first_name, age * 2 AS double_age FROM Students;
+
+-- Division
+SELECT first_name, age / 2 AS half_age FROM Students;
+✅ 5. Boolean SQL Queries (Any 3)
+-- Greater than
+SELECT * FROM Students WHERE age > 20;
+
+-- Equal to
+SELECT * FROM Students WHERE department = 'IT';
+
+-- Not equal
+SELECT * FROM Students WHERE department != 'Mechanical';
+✅ 6. Pattern Matching Queries (Any 3)
+-- Starts with 'R'
+SELECT * FROM Students WHERE first_name LIKE 'R%';
+
+-- Ends with 'a'
+SELECT * FROM Students WHERE first_name LIKE '%a';
+
+-- Contains 'h'
+SELECT * FROM Students WHERE first_name LIKE '%h%';
+✅ 7. TRUNCATE vs DROP
+🔹 TRUNCATE TABLE
+TRUNCATE TABLE Students;

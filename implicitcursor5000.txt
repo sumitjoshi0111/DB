@@ -1,0 +1,50 @@
+✅ 1. Assume Customer Table
+CREATE TABLE Customer (
+    cust_id INT PRIMARY KEY,
+    name VARCHAR2(50),
+    salary NUMBER
+);
+✅ 2. Implicit Cursor Example (UPDATE + ROWCOUNT)
+SET SERVEROUTPUT ON;
+
+BEGIN
+    -- Update salary of all customers
+    UPDATE Customer
+    SET salary = salary + 5000;
+
+    -- Display number of rows affected
+    DBMS_OUTPUT.PUT_LINE('Rows Updated: ' || SQL%ROWCOUNT);
+END;
+/
+
+2.
+
+✅ 1. Create Table
+CREATE TABLE salespeople (
+    salesman_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    city VARCHAR(50),
+    commission DECIMAL(4,2)
+);
+✅ 2. Insert Given Data
+INSERT INTO salespeople VALUES
+(5001, 'James Hoog', 'New York', 0.15),
+(5002, 'Nail Knite', 'Paris', 0.13),
+(5005, 'Pit Alex', 'London', 0.11),
+(5006, 'Mc Lyon', 'Paris', 0.14),
+(5007, 'Paul Adam', 'Rome', 0.13),
+(5003, 'Lauson Hen', 'San Jose', 0.12);
+✅ 3. (a) View for Salespeople from New York
+CREATE VIEW NewYork_Salespeople AS
+SELECT *
+FROM salespeople
+WHERE city = 'New York';
+🔹 Check View
+SELECT * FROM NewYork_Salespeople;
+✅ 4. (b) View to Count Salespeople in Each City
+CREATE VIEW City_Count AS
+SELECT city, COUNT(*) AS total_salespeople
+FROM salespeople
+GROUP BY city;
+🔹 Check View
+SELECT * FROM City_Count;
